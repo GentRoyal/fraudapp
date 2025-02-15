@@ -9,6 +9,8 @@ st.set_page_config(
 	page_icon="🛡️",
     layout="wide"
 )
+if 'random_values' not in st.session_state:
+    st.session_state.random_values = {}
 
 # Load Model
 def load_model():
