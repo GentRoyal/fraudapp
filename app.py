@@ -15,12 +15,11 @@ if 'random_values' not in st.session_state:
 # Load Model
 def load_model():
     try:
-        with open("best_model.pkl", "rb") as file:
-            model = pickle.load(file)
-            return model
-            
+        with open('best_model2.pkl', 'rb') as file:
+            return pickle.load(file)
     except Exception as e:
-        print("Error loading model:", e)
+        st.error(f"Error loading model: {str(e)}")
+        return None
         
 def generate_random_values():
     random_values = {}
