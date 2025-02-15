@@ -13,6 +13,7 @@ if 'random_values' not in st.session_state:
     st.session_state.random_values = {}
 
 # Load Model
+@st.cache_resource
 def load_model():
     with open("best_model.pkl", 'rb') as file:
         return pkl.load(file)
