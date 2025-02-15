@@ -15,7 +15,7 @@ if 'random_values' not in st.session_state:
 # Load Model
 def load_model():
     try:
-        with open("best_model2.pkl", "rb") as file:
+        with open("best_model.pkl", "rb") as file:
             model = pkl.load(file)
             print("Model loaded successfully!")
     except Exception as e:
@@ -90,13 +90,13 @@ def make_predictions():
         
         if submit:
             model = load_model()
-            features = pd.DataFrame([features])
+            features_df = pd.DataFrame([features])
             
-            prediction = model.predict(features)
-            #probability = model.predict_proba(X_test)[:, 1].round(3)
+            prediction = model.predict(features_df)
+            probability = model.predict_proba(features_df)[:, 1].round(3)
             
             st.write("Prediction: ", prediction)
-            #st.write("Probability: ", probability)
+            st.write("Probability: ", probability)
             
     
 def main():
