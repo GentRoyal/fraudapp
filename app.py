@@ -14,34 +14,24 @@ st.set_page_config(
 # Initialize session state
 if 'random_values' not in st.session_state:
     st.session_state.random_values = {}
-if 'model' not in st.session_state:
-    st.session_state.model = None
+#if 'model' not in st.session_state: st.session_state.model = None
 
-# Load Model with better error handling
-def load_model() -> Optional[object]:
-    """Load the pickle model if not already loaded in session state"""
-    if st.session_state.model is not None:
-        return st.session_state.model
-        
+# Load Model
+def load_model():
     try:
         with open('best_model2.pkl', 'rb') as file:
-            model = pickle.load(file)
-            st.session_state.model = model
-            return model
-    except FileNotFoundError:
-        st.error("Model file 'best_model2.pkl' not found. Please ensure it's in the same directory as the script.")
-        return None
+            return pickle.load(file)
     except Exception as e:
         st.error(f"Error loading model: {str(e)}")
         return None
-
-def generate_random_values() -> dict:
-    """Generate random values for all features"""
+def generate_random_values():
     random_values = {}
     random_values['Time'] = np.random.uniform(0, 1000)
     for i in range(1, 29):
         random_values[f'V{i}'] = np.random.uniform(-10, 10)
+    
     random_values['Amount'] = np.random.uniform(0, 1000000)
+    
     return random_values
 
 def make_predictions():
