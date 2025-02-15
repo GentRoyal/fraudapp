@@ -88,16 +88,15 @@ def make_predictions():
             features_df = pd.DataFrame([features])
             expected_order = ['Time'] + [f'V{i}' for i in range(1, 29)] + ['Amount']
             features_df = features_df[expected_order]
-			
-			model = load_model()
             
+            model = load_model()
             # Make prediction
-			prediction = model.predict(features_df)
-			probability = model.predict_proba(features_df)[:, 1].round(3)
-			
-			st.success("Prediction made successfully!")
-			st.write("Prediction:", "Fraudulent" if prediction[0] == 1 else "Legitimate")
-			st.write("Fraud Probability:", f"{probability[0]:.1%}")
+            prediction = model.predict(features_df)
+            probability = model.predict_proba(features_df)[:, 1].round(3)
+            
+            st.success("Prediction made successfully!")
+            st.write("Prediction:", "Fraudulent" if prediction[0] == 1 else "Legitimate")
+            st.write("Fraud Probability:", f"{probability[0]:.1%}")
 			
 def other_page():
     st.title("Other Page")
