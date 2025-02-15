@@ -1,6 +1,6 @@
 import pandas as pd
 import numpy as np
-import pickle as pkl
+import pickle
 import streamlit as st
 
 # Configure App
@@ -16,9 +16,9 @@ if 'random_values' not in st.session_state:
 def load_model():
     try:
         with open("best_model.pkl", "rb") as file:
-            model = pkl.load(file)
-            print("Model loaded successfully!")
+            model = pickle.load(file)
             return model
+            
     except Exception as e:
         print("Error loading model:", e)
         
