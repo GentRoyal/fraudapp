@@ -13,14 +13,13 @@ if 'random_values' not in st.session_state:
     st.session_state.random_values = {}
 
 # Load Model
-@st.cache_resource
 def load_model():
     try:
-    	with open("best_model.pkl", "rb") as file:
-        	model = pkl.load(file)
-    		print("Model loaded successfully!")
+        with open("best_model.pkl", "rb") as file:
+            model = pkl.load(file)
+            print("Model loaded successfully!")
     except Exception as e:
-	    print("Error loading model:", e)
+        print("Error loading model:", e)
         
 def generate_random_values():
     random_values = {}
@@ -94,10 +93,10 @@ def make_predictions():
             features = pd.DataFrame([features])
             
             prediction = model.predict(features)[0]
-            #probability = model.predict_proba(X_test)[:, 1].round(3)
+            probability = model.predict_proba(X_test)[:, 1].round(3)
             
             st.write("Prediction: ", prediction)
-            #st.write("Probability: ", probability)
+            st.write("Probability: ", probability)
             
     
 def main():
