@@ -14,9 +14,9 @@ st.set_page_config(
 # Initialize session state
 if 'random_values' not in st.session_state:
     st.session_state.random_values = {}
-#if 'model' not in st.session_state: st.session_state.model = None
 
 # Load Model
+@st.cache_resource
 def load_model():
     try:
         with open('best_model2.pkl', 'rb') as file:
@@ -24,6 +24,17 @@ def load_model():
     except Exception as e:
         st.error(f"Error loading model: {str(e)}")
         return None
+        
+@st.cache_resource
+def load_scaler():
+    try:
+        with open("scaler.pkl", "rb") as f:
+            return pickle.load(f)
+            
+    except Exception as e:
+        st.error(f"Error loading scalar: {str(e)}")
+        return None
+
 def generate_random_values():
     random_values = {}
     random_values['Time'] = np.random.uniform(0, 1000)
@@ -80,9 +91,13 @@ def make_predictions():
             features_df = features_df[expected_order]
             
             model = load_model()
+            scaler = load_scaler()
+            
             # Make prediction
-            prediction = model.predict(features_df)
-            probability = model.predict_proba(features_df)[:, 1].round(3)
+            scaled_features = scaler.transform(features_df)
+            
+            prediction = model.predict(scaled_features)[0]
+            probability = model.predict_proba(scaled_features)[:, 1].round(3)
             
             st.success("Prediction made successfully!")
             st.write("Prediction:", "Fraudulent" if prediction[0] == 1 else "Legitimate")
