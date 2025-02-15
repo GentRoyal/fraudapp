@@ -79,6 +79,8 @@ def make_predictions():
                                                 min_value = 0.0,
                                                 value = st.session_state.random_values.get(f"V{i}", 0.0)
                                         )
+                                        
+        st.form_submit_button("Make Prediction", type = "primary")
     
     
 def main():
