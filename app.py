@@ -76,7 +76,7 @@ def make_predictions():
                                         )
     
         with col5:
-            for i in range(23, 28):
+            for i in range(22, 29):
                 features[f'V{i}'] = st.number_input(f"V{i}",
                                                 min_value = 0.0,
                                                 value = st.session_state.random_values.get(f"V{i}", 0.0)
