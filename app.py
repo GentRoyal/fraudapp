@@ -82,8 +82,18 @@ def make_predictions():
                                                 value = st.session_state.random_values.get(f"V{i}", 0.0)
                                         )
                                         
-        st.form_submit_button("Make Prediction", type = "primary")
-    
+        submit = st.form_submit_button("Make Prediction", type = "primary")
+        
+        if submit:
+            model = load_model()
+            features = pd.DataFrame([features])
+            
+            prediction = model.predict(features)[0]
+            probability = model.predict_proba(X_test)[:, 1].round(3)
+            
+            st.write("Prediction: ", prediction)
+            st.write("Probability: ", probability)
+            
     
 def main():
     st.sidebar.title("Navigation")
