@@ -92,11 +92,11 @@ def make_predictions():
             model = load_model()
             features = pd.DataFrame([features])
             
-            prediction = model.predict(features)[0]
-            probability = model.predict_proba(X_test)[:, 1].round(3)
+            prediction = model.predict(features)
+            #probability = model.predict_proba(X_test)[:, 1].round(3)
             
             st.write("Prediction: ", prediction)
-            st.write("Probability: ", probability)
+            #st.write("Probability: ", probability)
             
     
 def main():
