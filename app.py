@@ -15,8 +15,12 @@ if 'random_values' not in st.session_state:
 # Load Model
 @st.cache_resource
 def load_model():
-    with open("best_model.pkl", 'rb') as file:
-        return pkl.load(file)
+    try:
+    	with open("best_model.pkl", "rb") as file:
+        	model = pkl.load(file)
+    		print("Model loaded successfully!")
+    except Exception as e:
+	    print("Error loading model:", e)
         
 def generate_random_values():
     random_values = {}
