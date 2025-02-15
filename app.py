@@ -15,7 +15,7 @@ if 'random_values' not in st.session_state:
 # Load Model
 def load_model():
     try:
-        with open("best_model.pkl", "rb") as file:
+        with open("best_model2.pkl", "rb") as file:
             model = pkl.load(file)
             print("Model loaded successfully!")
     except Exception as e:
