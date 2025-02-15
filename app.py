@@ -97,11 +97,11 @@ def make_predictions():
             scaled_features = scaler.transform(features_df)
             
             prediction = model.predict(scaled_features)[0]
-            probability = model.predict_proba(scaled_features)[:, 1].round(3)
+            probability = model.predict_proba(scaled_features)[:, 1].round(3)[0]
             
             st.success("Prediction made successfully!")
-            st.write("Prediction:", "Fraudulent" if prediction[0] == 1 else "Legitimate")
-            st.write("Fraud Probability:", f"{probability[0]:.1%}")
+            st.write("Prediction:", "Fraudulent" if prediction == 1 else "Legitimate")
+            st.write("Fraud Probability:", f"{probability:.1%}")
 			
 def other_page():
     st.title("Other Page")
