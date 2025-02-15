@@ -91,6 +91,8 @@ def make_predictions():
         if submit:
             model = load_model()
             features_df = pd.DataFrame([features])
+            expected_order = ['Time'] + [f'V{i}' for i in range(1, 29)] + ['Amount']
+            features_df = features_df[expected_order]
             
             prediction = model.predict(features_df)
             probability = model.predict_proba(features_df)[:, 1].round(3)
