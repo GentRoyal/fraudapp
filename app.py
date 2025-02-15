@@ -55,7 +55,7 @@ def make_predictions():
         with col2:
             for i in range(1, 8):
                 features[f'V{i}'] = st.number_input(f"V{i}",
-                                                min_value = 0.0,
+                                                min_value = -10.0,
                                                 value = st.session_state.random_values.get(f"V{i}", 0.0)
                                         )
                                         
@@ -63,7 +63,7 @@ def make_predictions():
         with col3:
             for i in range(8, 15):
                 features[f'V{i}'] = st.number_input(f"V{i}",
-                                                min_value = 0.0,
+                                                min_value = -10.0,
                                                 value = st.session_state.random_values.get(f"V{i}", 0.0)
                                         )
         
@@ -71,14 +71,14 @@ def make_predictions():
         with col4:
             for i in range(15, 22):
                 features[f'V{i}'] = st.number_input(f"V{i}",
-                                                min_value = 0.0,
+                                                min_value = -10.0,
                                                 value = st.session_state.random_values.get(f"V{i}", 0.0)
                                         )
     
         with col5:
             for i in range(22, 29):
                 features[f'V{i}'] = st.number_input(f"V{i}",
-                                                min_value = 0.0,
+                                                min_value = -10.0,
                                                 value = st.session_state.random_values.get(f"V{i}", 0.0)
                                         )
                                         
