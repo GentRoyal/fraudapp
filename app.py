@@ -86,9 +86,9 @@ def make_predictions():
                                                 value = st.session_state.random_values.get(f"V{i}", 0.0)
                                         )
                                         
-        submit = st.form_submit_button("Make Prediction", type = "primary")
+        submitted = st.form_submit_button("Make Prediction", type="primary")
         
-        if submit:
+        if submitted:
             model = load_model()
             features_df = pd.DataFrame([features])
             expected_order = ['Time'] + [f'V{i}' for i in range(1, 29)] + ['Amount']
