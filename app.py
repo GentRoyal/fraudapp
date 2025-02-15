@@ -18,6 +18,7 @@ def load_model():
         with open("best_model.pkl", "rb") as file:
             model = pkl.load(file)
             print("Model loaded successfully!")
+            return model
     except Exception as e:
         print("Error loading model:", e)
         
