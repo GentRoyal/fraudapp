@@ -44,20 +44,6 @@ def generate_random_values() -> dict:
     random_values['Amount'] = np.random.uniform(0, 1000000)
     return random_values
 
-def make_prediction(features_df: pd.DataFrame) -> tuple[Optional[np.ndarray], Optional[float]]:
-    """Make prediction with error handling"""
-    model = load_model()
-    if model is None:
-        return None, None
-        
-    try:
-        prediction = model.predict(features_df)
-        probability = model.predict_proba(features_df)[:, 1].round(3)
-        return prediction, probability
-    except Exception as e:
-        st.error(f"Error making prediction: {str(e)}")
-        return None, None
-
 def make_predictions():
     st.title("Generate Prediction")
     
@@ -102,19 +88,17 @@ def make_predictions():
             features_df = pd.DataFrame([features])
             expected_order = ['Time'] + [f'V{i}' for i in range(1, 29)] + ['Amount']
             features_df = features_df[expected_order]
+			
+			model = load_model()
             
             # Make prediction
-            prediction, probability = make_prediction(features_df)
-            
-            if prediction is not None and probability is not None:
-                st.success("Prediction made successfully!")
-                st.write("Prediction:", "Fraudulent" if prediction[0] == 1 else "Legitimate")
-                st.write("Fraud Probability:", f"{probability[0]:.1%}")
-                
-                # Display feature importance or additional insights
-                st.write("Input Features:")
-                st.dataframe(features_df)
-
+			prediction = model.predict(features_df)
+			probability = model.predict_proba(features_df)[:, 1].round(3)
+			
+			st.success("Prediction made successfully!")
+			st.write("Prediction:", "Fraudulent" if prediction[0] == 1 else "Legitimate")
+			st.write("Fraud Probability:", f"{probability[0]:.1%}")
+			
 def other_page():
     st.title("Other Page")
     st.write("This is another page of the application.")
